@@ -40,7 +40,47 @@ public class StreamAppTest {
         System.out.println("streamForEach");
         String expResult = "-10123";
         String result = StreamApp.streamForEach(intStream);
-        assertEquals(expResult, result);        
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testStreamAverage() {
+        System.out.println("StreamAverage");
+        double expResult = 1.0;
+        double result = intStream.average();
+        assertEquals(expResult, result, 0.0000001);
+    }
+
+    @Test
+    public void testStreamMin() {
+        System.out.println("StreamMin");
+        int expResult = -1;
+        int result = intStream.min();
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testStreamMax() {
+        System.out.println("StreamMax");
+        int expResult = 3;
+        int result = intStream.max();
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testStreamCount() {
+        System.out.println("StreamCount");
+        int expResult = 5;
+        long result = intStream.count();
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testStreamSum() {
+        System.out.println("StreamSum");
+        int expResult = 5;
+        long result = intStream.sum();
+        assertEquals(expResult, result);
     }
     
 }
