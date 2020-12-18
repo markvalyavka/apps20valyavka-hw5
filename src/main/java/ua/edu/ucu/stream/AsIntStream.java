@@ -3,8 +3,6 @@ package ua.edu.ucu.stream;
 import ua.edu.ucu.function.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class AsIntStream implements IntStream {
@@ -21,7 +19,7 @@ public class AsIntStream implements IntStream {
     }
 
     private AsIntStream(int[] values) {
-        for (Integer value : values) {
+        for (int value : values) {
             elementsList.add(value);
         }
         size = values.length;
@@ -81,7 +79,7 @@ public class AsIntStream implements IntStream {
     @Override
     public IntStream filter(IntPredicate predicate) {
         List<Integer> tempElementsList = new ArrayList();
-        for (Integer num : elementsList) {
+        for (int num : elementsList) {
             if (predicate.test(num)) {
                 tempElementsList.add(num);
             }
@@ -91,7 +89,7 @@ public class AsIntStream implements IntStream {
 
     @Override
     public void forEach(IntConsumer action) {
-        for (Integer num : elementsList) {
+        for (int num : elementsList) {
             action.accept(num);
         }
     }
@@ -109,7 +107,8 @@ public class AsIntStream implements IntStream {
     public IntStream flatMap(IntToIntStreamFunction func) {
         List<Integer> tempElementsList = new ArrayList();
         for (int i = 0; i < size; i++) {
-            int[] mappedArr = func.applyAsIntStream(elementsList.get(i)).toArray();
+            int[] mappedArr = func.applyAsIntStream(elementsList.get(i))
+                    .toArray();
             for (int num : mappedArr) {
                 tempElementsList.add(num);
             }
@@ -119,10 +118,11 @@ public class AsIntStream implements IntStream {
 
     @Override
     public int reduce(int identity, IntBinaryOperator op) {
+        int reduced = identity;
         for (Integer num : elementsList) {
-            identity = op.apply(identity, num);
+            reduced = op.apply(reduced, num);
         }
-        return identity;
+        return reduced;
     }
 
     @Override
